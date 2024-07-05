@@ -1,8 +1,11 @@
 package com.employee_thymeleaf.service;
 
-import com.employee_thymeleaf.dto.EmployeeDTO;
+import com.employee_thymeleaf.entity.EmployeeEntity;
+
+import java.util.List;
 
 public interface EmployeeService {
-    EmployeeDTO createEmployee(EmployeeDTO employeeDTO);
-}
+    EmployeeEntity createEmployee(EmployeeEntity entity);
 
+    List<EmployeeEntity> getEmployees();
+}

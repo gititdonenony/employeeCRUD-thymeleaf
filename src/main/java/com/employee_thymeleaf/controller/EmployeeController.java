@@ -1,24 +1,22 @@
 package com.employee_thymeleaf.controller;
 
-import com.employee_thymeleaf.dto.EmployeeDTO;
+import com.employee_thymeleaf.entity.EmployeeEntity;
 import com.employee_thymeleaf.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class EmployeeController {
     @Autowired
-    private EmployeeService employeeService;
+    EmployeeService employeeService;
 
-    @PostMapping("/create")
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        EmployeeDTO createdEmployee = employeeService.createEmployee(employeeDTO);
-        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
+    @GetMapping("/employees")
+    public String listEmployees(Model model) {
+        model.addAttribute("employees", employeeService.getEmployees());
+        return "employees";
     }
-
+}
 }
